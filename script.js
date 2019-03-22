@@ -105,7 +105,6 @@ function allCodes(base=[[]]) {
 
 // Gives a response to a guess only when the code is complete
 function respond(code, hidden=secret) {
-    console.log("Code is: " + code + " hidden is: " + hidden);
 	let full_matches = 0;
 	let half_matches = 0;
 
@@ -121,7 +120,6 @@ function respond(code, hidden=secret) {
 		}
 	}
 
-    console.log("Unmatched guess/hidden: " + unmatched_code+ " " + unmatched_hidden);
 	// Half matches are found where a color matches but location doesn't
 	for (let i=0; i < unmatched_hidden.length; i++) {
 		if (unmatched_code.includes(unmatched_hidden[i])) {
