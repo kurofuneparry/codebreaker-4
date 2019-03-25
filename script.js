@@ -17,19 +17,19 @@ menuDiv = document.getElementById('menu');
 //
 
 // Makes a dot
-function makeDot(color=colors[0], htmlClass='dot') {
+function makeDot(color=colors[0], htmlClass='') {
 	let dot = document.createElement('span');
-    dot.style.backgroundColor = color;
+	dot.style.backgroundColor = color;
 	dot.className = htmlClass;
 	return dot;
 }
 
 // Makes a button
 function button(name, func) {
-    let result = document.createElement('button');
-    result.onclick = func;
-    result.appendChild(document.createTextNode(name));
-    return result
+	let result = document.createElement('button');
+	result.onclick = func;
+	result.appendChild(document.createTextNode(name));
+	return result
 }
 
 // Checks if two arrays match perfectly
@@ -48,14 +48,14 @@ function matches(a, b) {
 
 // Returns a random code
 function random() {
-    let result = [];
-    let choose = function(choices) { // Picks a random element from choices
-    	return choices[Math.floor(Math.random() * choices.length)];
-    }
-    while (result.length < length) {
-        result.push(choose(colors));
-    }
-    return result;
+	let result = [];
+	let choose = function(choices) { // Picks a random element from choices
+		return choices[Math.floor(Math.random() * choices.length)];
+    	}
+    	while (result.length < length) {
+		result.push(choose(colors));
+    	}
+    	return result;
 }
 
 // Clears the current guess
@@ -68,25 +68,25 @@ function clear() {
 
 // Pulls the current guess from the page as an array
 function guess() {
-    let result = [];
-    for (let i=0; i<guessDiv.children.length; i++) {
-        let color = guessDiv.children[i].style.backgroundColor;
-        if (color != 'white') {
-            result.push(color);
-        }
-    }
-    return result;
+	let result = [];
+	for (let i=0; i<guessDiv.children.length; i++) {
+		let color = guessDiv.children[i].style.backgroundColor;
+		if (color != 'white') {
+			result.push(color);
+		}
+    	}
+    	return result;
 }
 
 // Adds the color to the guess
 function addColor(color) {
 	// The first 'empty' dot is colored
 	for (let i=0; i<guessDiv.children.length; i++) {
-	    if (guessDiv.children[i].className == 'empty') {
-	        guessDiv.children[i].style.backgroundColor = color;
-	        guessDiv.children[i].className = 'dot';
-	        break; // No 'empty' dot? Then nothing happens in this loop
-	    }
+	    	if (guessDiv.children[i].className == 'empty') {
+	        	guessDiv.children[i].style.backgroundColor = color;
+	        	guessDiv.children[i].className = 'dot';
+	        	break; // No 'empty' dot? Then nothing happens in this loop
+	    	}
 	}
 }
 
@@ -142,7 +142,6 @@ function eliminate(guess, response) {
 			eliminated.push(remainingCodes[i]);
 		}
 	}
-
 	return eliminated;
 }
 
@@ -152,7 +151,7 @@ function submit(code) {
 	let response = respond(code);
 	let eliminated = eliminate(code, response);
 
-    // The eliminated codes are removed from remainingCodes
+    	// The eliminated codes are removed from remainingCodes
 	let remaining = [];
 	for (let i=0; i < remainingCodes.length; i++) {
 		if (!eliminated.includes(remainingCodes[i])) {
@@ -162,27 +161,27 @@ function submit(code) {
 	remainingCodes = remaining;
 
 	// Elements for the response are created        
-    let div = document.createElement('div');
-    let dotResponse = document.createElement('div');
-    let textResponse = document.createElement('div');
+    	let div = document.createElement('div');
+    	let dotResponse = document.createElement('div');
+    	let textResponse = document.createElement('div');
 
-    // Colored dots are copied for the response
-    for (let i=0; i<code.length; i++) {
-        dotResponse.appendChild(makeDot(code[i]));
-    }
+    	// Colored dots are copied for the response
+    	for (let i=0; i<code.length; i++) {
+	        dotResponse.appendChild(makeDot(code[i]));
+    	}
 
 	// The text response is created
 	textResponse.setAttribute("class", "response");
 	textResponse.innerHTML += "<strong>" + response[0] + "</strong> right color/place | ";
 	textResponse.innerHTML += "<strong>" + response[1] + "</strong> right color, wrong place ";
-    textResponse.innerHTML += "with " + remainingCodes.length + " possibilities remaining";
+	textResponse.innerHTML += "with " + remainingCodes.length + " possibilities remaining";
 	div.appendChild(textResponse);
 	
-    // The elements are added to the page and the guess is cleared
-    div.appendChild(dotResponse);
-    div.appendChild(textResponse);
-    historyDiv.appendChild(div);
-    clear();
+    	// The elements are added to the page and the guess is cleared
+    	div.appendChild(dotResponse);
+    	div.appendChild(textResponse);
+    	historyDiv.appendChild(div);
+    	clear();
 }
 
 //
@@ -203,9 +202,9 @@ for (let i=0; i < colors.length; i++) {
 
 // Add buttons to the page
 menu.appendChild(button('Submit', function () {
-    if (guess().length == length) {
-        submit(guess());
-    }
+    	if (guess().length == length) {
+	        submit(guess());
+    	}
 }));
 menu.appendChild(button('Clear', clear));
 
